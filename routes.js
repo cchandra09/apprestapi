@@ -10,4 +10,7 @@ module.exports = function(app) {
 
     app.route('/show/:id')
         .get(myJson.showBaseOnId)
+
+    app.route('/create')
+        .post(myJson.addMahasiswa)
 }

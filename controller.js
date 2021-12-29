@@ -18,8 +18,12 @@ exports.showAllDataMahasiswa = function(req, res) {
     });
 }
 
+
+//Menampilkan Data Berdasarkan ID
 exports.showBaseOnId = function(req, res){
     let id = req.params.id;
+
+    console.log(id);
     connection.query("SELECT * FROM mahasiswa WHERE id_mahasiswa = ?", [id],
         function(err, rows, field){
             if(err){
@@ -29,4 +33,21 @@ exports.showBaseOnId = function(req, res){
             }
         }
     )
+}
+
+//Create Data Mahasiswa
+exports.addMahasiswa = function(req, res){
+    let nim = req.body.nim;
+    var nama = req.body.nama;
+    var jurusan = req.body.jurusan;
+    console.log(nim);
+    connection.query('INSERT INTO mahasiswa (nim,nama,jurusan) VALUES(?,?,?)',
+        [nim, nama, jurusan],
+        function (error, rows, fields) {
+            if (error) {
+                console.log(error);
+            } else {
+                response.ok("Berhasil Menambahkan Data!", res)
+            }
+        });
 }
