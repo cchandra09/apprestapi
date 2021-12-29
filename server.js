@@ -10,7 +10,7 @@ app.use(bodyParser.json());
 var routes = require('./routes');
 routes(app);
 
-const port = 3000;
+const port = 5000;
 app.listen(port, () => {
     console.log('Sercer Started on port')
 });
