@@ -11,9 +11,22 @@ exports.index = function(req, res){
 exports.showAllDataMahasiswa = function(req, res) {
     connection.query("SELECT * FROM mahasiswa", function(err, rows, fields) {
         if(err){
-            connection.log(err);
+            console.log(err);
         }else{
             response.ok(rows, res);
         }
     });
+}
+
+exports.showBaseOnId = function(req, res){
+    let id = req.params.id;
+    connection.query("SELECT * FROM mahasiswa WHERE id_mahasiswa = ?", [id],
+        function(err, rows, field){
+            if(err){
+                console.log(err)
+            }else{
+                response.ok(rows, res)
+            }
+        }
+    )
 }
