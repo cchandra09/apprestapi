@@ -38,8 +38,8 @@ exports.showBaseOnId = function(req, res){
 //Create Data Mahasiswa
 exports.addMahasiswa = function(req, res){
     let nim = req.body.nim;
-    var nama = req.body.nama;
-    var jurusan = req.body.jurusan;
+    let nama = req.body.nama;
+    let jurusan = req.body.jurusan;
     console.log(nim);
     connection.query('INSERT INTO mahasiswa (nim,nama,jurusan) VALUES(?,?,?)',
         [nim, nama, jurusan],
@@ -50,4 +50,37 @@ exports.addMahasiswa = function(req, res){
                 response.ok("Berhasil Menambahkan Data!", res)
             }
         });
+}
+
+// Update Data Mahasiswa
+exports.updateMahasiswa = function(req, res) {
+    let id = req.params.id;
+    let nim = req.body.nim;
+    let nama = req.body.nama;
+    let jurusan = req.body.jurusan;
+
+    connection.query("UPDATE mahasiswa SET nim=?, nama=?, jurusan=? WHERE id_mahasiswa =?", [nim,nama,jurusan,id], 
+        function (error, rows, fields) {
+            if(error) {
+                console.log(error);
+            }else{
+                response.ok("Berhasil Update Data!.", res);
+            }
+        }
+    )
+}
+
+//Delete Mahassiwa
+exports.deleteMahasiswa = function(req, res){
+    let id = req.params.id;
+
+    connection.query("DELETE FROM mahasiswa WHERE id_mahasiswa = ?", [id], 
+        function(error, rows, fields) {
+            if(error){
+                console.log(error);
+            }else{
+                response.ok("Berhasil Delete Data!", res)
+            }
+        }
+    )
 }

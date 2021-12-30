@@ -13,4 +13,10 @@ module.exports = function(app) {
 
     app.route('/create')
         .post(myJson.addMahasiswa)
+
+    app.route('/update/:id')
+        .put(myJson.updateMahasiswa)
+
+    app.route('/delete/:id')
+        .delete(myJson.deleteMahasiswa)
 }
